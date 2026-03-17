@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall  -Wl,--dependency-file=CMakeFiles/eser1-NEW.dir/link.d "CMakeFiles/eser1-NEW.dir/media.cpp.o" -o eser1-NEW
