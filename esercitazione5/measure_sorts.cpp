@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip> // per formattare l'output in tabella
 #include <vector>
+#include <fstream>
 #include <algorithm>
 #include <random>
 #include <string>
@@ -10,19 +11,25 @@
 
 int main() {
     std:: vector<int> sizes;
+    std::string filename="tempi_test.txt";
+    std::ofstream ofs(filename);
+    if (!ofs.is_open()){
+        std::cerr << "Errore nell'apertura del file"<<std::endl;
+        return 1;
+    }
     for (int n=1; n<=100; n=n+10){
         sizes.push_back(n);
     }
     int ripetizioni=100;
     //FORMATTAZZIONE OUTPUT
-    std::cout<< std::left<< std::setw(10)<<"Size"
-             <<std::setw(12)<< "Bubble"
-             <<std::setw(12)<< "Insertion"
-             <<std::setw(12)<< "Selection"
-             <<std::setw(12)<< "Mergesort"
-             <<std::setw(12)<< "Quicksort"
-             <<std::setw(12)<< "std::sort"<< std::endl;
-    std::cout << std::string(80,'-')<<std::endl;
+    ofs << std::left<< std::setw(10)<<"Size"
+        <<std::setw(12)<< "Bubble"
+        <<std::setw(12)<< "Insertion"
+        <<std::setw(12)<< "Selection"
+        <<std::setw(12)<< "Mergesort"
+        <<std::setw(12)<< "Quicksort"
+        <<std::setw(12)<< "std::sort"<< std::endl;
+    ofs << std::string(80,'-')<<std::endl;
 
     randfiller rf;
     timecounter tc;
@@ -90,7 +97,7 @@ int main() {
             double media_sort=t_sort/100;
             
         
-        std::cout << std::left << std::setw(6) << n
+        ofs << std::left << std::setw(6) << n
                   << std::setw(12) << media_bubble
                   << std::setw(12) << media_insertion
                   << std::setw(12) << media_selection
@@ -110,6 +117,7 @@ int main() {
     } else {
         std::cout << "n0 non trovato nel range testato." << std::endl;
     }
+    ofs.close();
     return 0;
 }   
 
